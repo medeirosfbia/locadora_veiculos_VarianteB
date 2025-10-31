@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Locadora de Veículos</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <header>
+        <nav class="menu-superior">
+            <ul>
+                <li><a href="{{ url_for('index') }}">Aluguel de Carro</a></li>
+                <li><a href="#">Seminovos</a></li>
+                <li><a href="#">Carros por Assinatura</a></li>
+            </ul>
+        </nav>
+        <h1>Bem-vindo à Locadora de Veículos B!</h1>
+    </header>
+    <main>
+        <!-- Destaque principal para SUVs -->
+        <section class="destaque-principal">
+            <h2>Destaque da Semana</h2>
+            <div class="destaque-card">
+                <a href="{{ url_for('ver_categoria', categoria_nome='suvs') }}">
+                    <img src="{{ url_for('static', filename='img/renegade_high_quality.png') }}" alt="SUV em destaque" class="destaque-img">
+                    <div class="destaque-info">
+                        <h3>Explore nossos SUVs</h3>
+                        <p>Conforto, espaço e tecnologia para sua viagem!</p>
+                        <span class="btn-alugar">Ver SUVs</span>
+                    </div>
+                </a>
+            </div>
+            <!-- Comentário de cliente -->
+            <div class="comentario-cliente" style="margin-top:24px; background:#23272a; color:#ff9800; padding:18px; border-radius:8px; max-width:600px; margin-left:auto; margin-right:auto;">
+                <strong>Depoimento de Cliente:</strong>
+                <p>"Aluguei um SUV aqui e foi perfeito para minha viagem em família. Recomendo!"<br>
+                <em>- João Silva</em></p>
+            </div>
+        </section>
+        <h2>Categorias de Veículos</h2>
+        <div class="categorias">
+            {% for categoria in categorias %}
+                <a href="{{ url_for('ver_categoria', categoria_nome=categoria) }}" class="categoria-card">
+                    {{ categoria.capitalize() }}
+                </a>
+            {% endfor %}
+        </div>
+    </main>
+</body>
+</html>
