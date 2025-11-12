@@ -47,5 +47,58 @@
             {% endfor %}
         </div>
     </main>
+
+    <!-- Botão do Chatbot -->
+    <div id="chatbot">🗨️</div>
+
+    <!-- Janela de Chat -->
+    <div id="chat-window">
+        <div id="chat-header">Chat com o Suporte</div>
+        <div id="chat-messages">
+            <div class="message bot">Olá! Como posso te ajudar?</div>
+        </div>
+        <div id="chat-input">
+            <input type="text" id="user-input" placeholder="Digite sua mensagem...">
+            <button id="send-btn">Enviar</button>
+        </div>
+    </div>
+
+    <script>
+        // Função para abrir e fechar o chat
+        const chatbotButton = document.getElementById('chatbot');
+        const chatWindow = document.getElementById('chat-window');
+        const sendButton = document.getElementById('send-btn');
+        const chatMessages = document.getElementById('chat-messages');
+        const userInput = document.getElementById('user-input');
+
+        chatbotButton.addEventListener('click', () => {
+            chatWindow.style.display = chatWindow.style.display === 'none' || chatWindow.style.display === '' ? 'flex' : 'none';
+        });
+
+        sendButton.addEventListener('click', () => {
+            const userMessage = userInput.value.trim();
+            if (userMessage !== '') {
+                // Adiciona a mensagem do usuário ao chat
+                const userMessageElement = document.createElement('div');
+                userMessageElement.classList.add('message', 'user');
+                userMessageElement.textContent = userMessage;
+                chatMessages.appendChild(userMessageElement);
+
+                // Limpa o campo de entrada
+                userInput.value = '';
+
+                // Resposta do chatbot
+                setTimeout(() => {
+                    const botMessageElement = document.createElement('div');
+                    botMessageElement.classList.add('message', 'bot');
+                    botMessageElement.textContent = "Estou aqui para ajudar! O que mais você precisa saber?";
+                    chatMessages.appendChild(botMessageElement);
+
+                    // Rola para a última mensagem
+                    chatMessages.scrollTop = chatMessages.scrollHeight;
+                }, 1000); // Delay de 1 segundo para simular resposta do bot
+            }
+        });
+    </script>
 </body>
 </html>
